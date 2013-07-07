@@ -12,19 +12,9 @@ namespace bdl
             _components = components;
         }
 
-        public bool Evaluate(params int[] values)
+        public List<BdlQueryComponent> Components
         {
-            return _components.Any(component => component.Evaluate(values));
-        }
-
-        public string ConvertToString()
-        {
-            return string.Join(".", _components.Select(x => x.ConvertToString()));
-        }
-
-        public string ConvertToXQuery(string varName)
-        {
-            return string.Join(" or ", _components.Select(x => x.ConvertToXQuery(varName)));
+            get { return _components; }
         }
     }
 }

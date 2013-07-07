@@ -9,19 +9,9 @@
             _content = content;
         }
 
-        public bool Evaluate(params int[] value)
+        public BdlQueryComponent Content
         {
-            return _content.Evaluate(value);
-        }
-
-        public string ConvertToString()
-        {
-            return "(" + _content.ConvertToString() + ")";
-        }
-
-        public string ConvertToXQuery(string varName)
-        {
-            return "(" + _content.ConvertToXQuery(varName) + ")";
+            get { return _content; }
         }
     }
 }

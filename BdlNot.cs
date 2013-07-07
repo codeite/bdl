@@ -9,19 +9,9 @@
             _next = next;
         }
 
-        public bool Evaluate(params int[] values)
+        public BdlQueryComponent Next
         {
-            return !_next.Evaluate(values);
-        }
-
-        public string ConvertToString()
-        {
-            return "!" + _next.ConvertToString();
-        }
-
-        public string ConvertToXQuery(string varName)
-        {
-            throw new System.NotImplementedException();
+            get { return _next; }
         }
     }
 }
