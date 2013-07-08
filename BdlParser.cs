@@ -57,17 +57,17 @@ namespace bdl
 
         private bool IsAnd(string token)
         {
-            return token == "+" || token == "&";
+            return token == "+" || token == "&" || token == "a";
         }
 
         private bool IsOr(string token)
         {
-            return token == "." || token == "|";
+            return token == "." || token == "|" || token == "o";
         }
 
         private bool IsNot(string token)
         {
-            return token == "!" || token == "¬";
+            return token == "!" || token == "¬" || token == "n";
         }
 
         private BdlQueryComponent ReadNotFactor()
@@ -130,7 +130,7 @@ namespace bdl
         public static Stack<string> Tokenize(string query)
         {
             //var collection = query.Split(new[] {'(', ')', '+', '|', '&', '.'});
-            var collection = Regex.Split(query, @"(?=[()+|&.!¬])|(?<=[()+|&.!¬])").Where(x => x != "").Reverse();
+            var collection = Regex.Split(query, @"(?=[()+|&.!¬ano])|(?<=[()+|&.!¬ano])").Where(x => x != "").Reverse();
             return new Stack<string>(collection);
         }
     }

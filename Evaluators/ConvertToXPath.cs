@@ -34,7 +34,7 @@ namespace bdl
             if (component is BdlNot)
             {
                 var not = component as BdlNot;
-                throw new System.NotImplementedException();
+                return "not(" + not.Next.ConvertToXQuery(name) + ")";
             }
 
             throw new InvalidOperationException();

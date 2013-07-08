@@ -6,6 +6,7 @@ namespace bdl.Tests
     public class ToXQueryTests
     {
         [TestCase("1", "$id = 1")]
+        [TestCase("n1", "not($id = 1)")]
         [TestCase("1.2", "$id = 1 or $id = 2")]
         [TestCase("1+2", "$id = 1 and $id = 2")]
         [TestCase("1+2+3", "$id = 1 and $id = 2 and $id = 3")]
