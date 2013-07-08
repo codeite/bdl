@@ -41,6 +41,10 @@ namespace bdl.Tests
         }
 
         [TestCase("1+2")]
+        [TestCase("1a2")]
+        [TestCase("1and2")]
+        [TestCase("1aNd2")]
+        [TestCase("1AND2")]
         public void TestAnd(string queryText)
         {
             // Arrange

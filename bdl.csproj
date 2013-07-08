@@ -52,6 +52,7 @@
     <Compile Include="BdlNot.cs" />
     <Compile Include="BdlOr.cs" />
     <Compile Include="BdlQueryComponent.cs" />
+    <Compile Include="BdlLexicalScanner.cs" />
     <Compile Include="BdlValue.cs" />
     <Compile Include="BdlParser.cs" />
     <Compile Include="Evaluators\ConvertToXPath.cs" />

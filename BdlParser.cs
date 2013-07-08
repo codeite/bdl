@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace bdl
 {
     public class BdlParser
     {
-        private readonly Stack<string> _tokens;
+        private readonly Queue<string> _tokens;
 
         public BdlParser(string query)
         {
-            _tokens = Tokenize(query);
+            var tokenizer = new BdlLexicalScanner();
+            _tokens = tokenizer.Tokenize(query);
             Query = ReadExpression();
+
+            if (_tokens.Any())
+            {
+                throw new Exception("Unknown junk at end of query:"+string.Join(", ", _tokens));
+            }
+
         }
 
         public BdlQueryComponent Query { get; private set; }
@@ -57,17 +62,17 @@ namespace bdl
 
         private bool IsAnd(string token)
         {
-            return token == "+" || token == "&" || token == "a";
+            return token == "+" || token == "&" || token == "a" || token == "and";
         }
 
         private bool IsOr(string token)
         {
-            return token == "." || token == "|" || token == "o";
+            return token == "." || token == "|" || token == "o" || token == "or";
         }
 
         private bool IsNot(string token)
         {
-            return token == "!" || token == "¬" || token == "n";
+            return token == "!" || token == "¬" || token == "n" || token == "not";
         }
 
         private BdlQueryComponent ReadNotFactor()
@@ -120,18 +125,11 @@ namespace bdl
 
         private void Read(string expectedToken = null)
         {
-            var token = _tokens.Pop();
+            var token = _tokens.Dequeue();
             if (expectedToken != null && token != expectedToken)
             {
                 throw new Exception(string.Format("Expected '{0}' but got '{1}'", expectedToken, token));
             }
-        }
-
-        public static Stack<string> Tokenize(string query)
-        {
-            //var collection = query.Split(new[] {'(', ')', '+', '|', '&', '.'});
-            var collection = Regex.Split(query, @"(?=[()+|&.!¬ano])|(?<=[()+|&.!¬ano])").Where(x => x != "").Reverse();
-            return new Stack<string>(collection);
         }
     }
 }
